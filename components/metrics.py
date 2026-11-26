@@ -3,7 +3,17 @@ Academic Metric card components and text formatters.
 Designed cleanly without emoji spam, using crisp borders and clean typography.
 """
 
+from pathlib import Path
+from textwrap import dedent
+
 import streamlit as st
+
+
+def _load_shared_styles() -> None:
+    """Apply the shared theme when a Streamlit page is opened directly."""
+    css_path = Path(__file__).resolve().parents[1] / "assets" / "style.css"
+    if css_path.exists():
+        st.html(css_path)
 
 
 def metric_card(label: str, value: str, description: str = "", delta: str = "", delta_type: str = "neutral"):
@@ -23,7 +33,7 @@ def metric_card(label: str, value: str, description: str = "", delta: str = "", 
         {desc_html}
     </div>
     """
-    st.markdown(html, unsafe_allow_html=True)
+    st.html(dedent(html).strip())
 
 
 def metric_row(metrics: list):
@@ -50,16 +60,17 @@ def academic_callout(text: str, callout_type: str = "primary", title: str = ""):
 
     header_html = f'<div style="font-weight: 600; font-size: 0.84rem; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.03em;">{title}</div>' if title else ""
 
-    st.markdown(f"""
+    st.html(dedent(f"""
     <div class="{css_class}">
         {header_html}
         <div>{text}</div>
     </div>
-    """, unsafe_allow_html=True)
+    """).strip())
 
 
 def page_header(title: str, subtitle: str = "", pills: list = None):
     """Render standard academic page header with optional metadata pills."""
+    _load_shared_styles()
     pill_html = ""
     if pills:
         pill_spans = []
@@ -72,10 +83,10 @@ def page_header(title: str, subtitle: str = "", pills: list = None):
             pill_spans.append(f'<span class="{cls}">{p.get("text", "")}</span>')
         pill_html = f'<div style="margin-top: 6px;">{" ".join(pill_spans)}</div>'
 
-    st.markdown(f"""
+    st.html(dedent(f"""
     <div class="page-header-academic">
         <h1>{title}</h1>
         <div class="subtitle">{subtitle}</div>
         {pill_html}
     </div>
-    """, unsafe_allow_html=True)
+    """).strip())
