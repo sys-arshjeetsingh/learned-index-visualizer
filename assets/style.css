@@ -1,0 +1,395 @@
+/* ============================================================
+   LEARNED INDEX VISUALIZER — Academic Research Theme
+   Design System:
+   - Off-White Background: #F7F8FA
+   - Dark Navy Sidebar: #17243A
+   - Primary Blue: #315E91
+   - Muted Teal: #368A83
+   - Charcoal Text: #202936
+   - Crisp White Cards with Subtle Borders: #E2E8F0
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    --bg-main: #F7F8FA;
+    --bg-card: #FFFFFF;
+    --sidebar-bg: #17243A;
+    --primary: #315E91;
+    --primary-light: #EBF3FC;
+    --teal: #368A83;
+    --teal-light: #E9F6F5;
+    --charcoal: #202936;
+    --muted: #64748B;
+    --border: #E2E8F0;
+    --border-dark: #CBD5E1;
+    --radius-sm: 4px;
+    --radius: 6px;
+    --shadow-subtle: 0 1px 3px rgba(16, 24, 40, 0.05);
+}
+
+/* Base Body and App Background */
+.stApp {
+    background-color: var(--bg-main) !important;
+    color: var(--charcoal) !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Sidebar Styling */
+section[data-testid="stSidebar"] {
+    background-color: var(--sidebar-bg) !important;
+    border-right: 1px solid #1E2E48 !important;
+}
+
+section[data-testid="stSidebar"] .stMarkdown,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label {
+    color: #E2E8F0 !important;
+}
+
+section[data-testid="stSidebar"] hr {
+    border-color: #273752 !important;
+    margin: 1rem 0 !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--charcoal) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.015em !important;
+}
+
+h1 {
+    font-size: 1.65rem !important;
+    margin-bottom: 0.35rem !important;
+    font-weight: 700 !important;
+}
+
+h2 {
+    font-size: 1.25rem !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+}
+
+h3 {
+    font-size: 1.05rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0.4rem !important;
+}
+
+/* Metric / KPI Cards */
+.metric-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+    box-shadow: var(--shadow-subtle);
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+}
+
+.metric-value {
+    color: var(--charcoal);
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.2;
+}
+
+.metric-desc {
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-top: 0.35rem;
+}
+
+/* Callout Boxes */
+.academic-box {
+    background-color: var(--bg-card);
+    border-left: 3px solid var(--primary);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0.85rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+    color: var(--charcoal);
+    line-height: 1.5;
+}
+
+.academic-box.teal {
+    border-left-color: var(--teal);
+}
+
+.academic-box.warning {
+    border-left-color: #D97706;
+    background-color: #FFFDF9;
+}
+
+/* Headers & Meta badges */
+.page-header-academic {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-header-academic h1 {
+    color: var(--charcoal);
+    margin: 0;
+}
+
+.page-header-academic .subtitle {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 0.25rem;
+}
+
+.academic-pill {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    background-color: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid #D1E3F8;
+    margin-right: 0.35rem;
+}
+
+.academic-pill.teal {
+    background-color: var(--teal-light);
+    color: var(--teal);
+    border-color: #C3E7E4;
+}
+
+.academic-pill.dark {
+    background-color: #F1F5F9;
+    color: #334155;
+    border-color: #E2E8F0;
+}
+
+/* Architecture Diagram */
+.architecture-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1rem;
+    margin: 1.25rem 0;
+    overflow-x: auto;
+    gap: 0.5rem;
+}
+
+.arch-node {
+    background: #FAFAFC;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 0.9rem;
+    text-align: center;
+    min-width: 130px;
+    flex: 1;
+}
+
+.arch-node .node-step {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+}
+
+.arch-node .node-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+.arch-node .node-desc {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+}
+
+.arch-connector {
+    color: var(--muted);
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0 0.2rem;
+}
+
+/* Comparison Table */
+.academic-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    font-size: 0.85rem;
+    margin: 1rem 0;
+}
+
+.academic-table th {
+    background-color: #F8FAFC;
+    color: #475569;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.65rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.academic-table td {
+    padding: 0.65rem 0.9rem;
+    border-bottom: 1px solid #F1F5F9;
+    color: var(--charcoal);
+}
+
+.academic-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Step Trace Display */
+.trace-step-row {
+    display: flex;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.45rem 0.75rem;
+    margin-bottom: 0.35rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--charcoal);
+}
+
+.trace-step-num {
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 65px;
+}
+
+.trace-step-range {
+    color: var(--muted);
+    min-width: 160px;
+}
+
+.trace-step-mid {
+    flex: 1;
+}
+
+.trace-step-action {
+    font-weight: 600;
+    text-align: right;
+    min-width: 90px;
+}
+
+.trace-step-action.found {
+    color: var(--teal);
+}
+
+.trace-step-action.navigate {
+    color: #475569;
+}
+
+/* Physical vs Index Memory Layout Display */
+.storage-layout {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.storage-column {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+}
+
+.storage-header {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3rem;
+}
+
+/* Buttons and Inputs */
+.stButton > button {
+    background-color: var(--primary) !important;
+    color: #FFFFFF !important;
+    border: 1px solid #284F7C !important;
+    border-radius: var(--radius-sm) !important;
+    font-weight: 500 !important;
+    font-size: 0.85rem !important;
+    padding: 0.45rem 1.1rem !important;
+    box-shadow: var(--shadow-subtle) !important;
+    transition: background-color 0.15s ease !important;
+}
+
+.stButton > button:hover {
+    background-color: #274D76 !important;
+    color: #FFFFFF !important;
+}
+
+/* Radio buttons & Selectboxes */
+div[role="radiogroup"] {
+    gap: 0.5rem;
+}
+
+/* Code spans */
+code {
+    font-family: 'JetBrains Mono', monospace !important;
+    background-color: #EEF2F6 !important;
+    color: #1E293B !important;
+    padding: 0.15rem 0.35rem !important;
+    border-radius: 3px !important;
+    font-size: 0.82em !important;
+    border: 1px solid #E2E8F0 !important;
+}
+
+/* Streamlit Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.stTabs [data-baseweb="tab"] {
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--muted) !important;
+    font-size: 0.84rem !important;
+    padding: 0.5rem 0.9rem !important;
+    font-weight: 500 !important;
+}
+
+.stTabs [aria-selected="true"] {
+    color: var(--primary) !important;
+    border-bottom: 2px solid var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Hide default streamlit decoration */
+header[data-testid="stHeader"] {
+    background-color: transparent !important;
+}
