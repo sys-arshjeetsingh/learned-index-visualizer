@@ -119,7 +119,7 @@ def render():
         max_error=model.max_error,
         title=f"Learned Linear CDF Model Fit — {bundle.name}"
     )
-    st.plotly_chart(fig_reg, use_container_width=True)
+    st.plotly_chart(fig_reg, width="stretch")
 
     st.markdown("---")
 
@@ -186,7 +186,7 @@ def render():
     st.markdown("")
     # Visual search window bar
     fig_win = search_window_comparison_plot(pred_pos, lo, hi, actual_idx, len(bundle.index_keys))
-    st.plotly_chart(fig_win, use_container_width=True)
+    st.plotly_chart(fig_win, width="stretch")
 
     st.markdown("---")
 
@@ -240,3 +240,7 @@ def render():
     # Step-by-Step Search Progression
     st.markdown("#### Local Binary Search Progression")
     search_steps_display(detailed_res.get("steps", []), query_key)
+
+
+if __name__ == "__main__":
+    render()
