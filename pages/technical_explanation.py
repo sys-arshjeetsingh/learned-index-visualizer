@@ -134,3 +134,7 @@ def render():
         callout_type="teal",
         title="Concluding Assessment"
     )
+
+
+if __name__ == "__main__":
+    render()
