@@ -42,6 +42,7 @@ st.sidebar.markdown("""
 # Navigation Options without emojis
 PAGES = [
     "Overview",
+    "Industry Key Lookup",
     "Dataset Explorer",
     "Learned Index Explained",
     "Algorithm Comparison",
@@ -78,6 +79,9 @@ st.sidebar.markdown("""
 # --- Page Routing ---
 if page == "Overview":
     from pages.overview import render
+    render()
+elif page == "Industry Key Lookup":
+    from pages.industry_lookup import render
     render()
 elif page == "Dataset Explorer":
     from pages.dataset_explorer import render
