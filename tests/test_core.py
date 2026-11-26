@@ -10,6 +10,7 @@ Tests:
 
 import sys
 import os
+from io import StringIO
 import numpy as np
 import pytest
 
@@ -24,6 +25,7 @@ from core.dataset import (
     generate_queries,
     DatasetBundle
 )
+from core.dataset import load_custom_csv
 from core.binary_search import binary_search, binary_search_with_stats, binary_search_in_range
 from core.learned_index_model import LearnedIndexModel
 
@@ -77,6 +79,30 @@ class TestDatasetAndRecords:
         assert bundle.duplicate_count == 2
         assert bundle.size == 4
         assert list(bundle.index_keys) == [100, 200, 300, 400]
+
+    def test_custom_csv_preserves_full_records_and_skips_invalid_keys(self):
+        csv_data = StringIO(
+            "customer_id,name,region,spend\n"
+            "101,Asha,North,1250\n"
+            "invalid,Ben,South,900\n"
+            "205,Chao,West,440\n"
+        )
+        csv_data.name = "customers.csv"
+        bundle = load_custom_csv(csv_data, "customer_id", "name")
+
+        assert bundle.size == 2
+        assert bundle.summary()["total_records"] == 2
+        result_record = bundle.get_record(int(bundle.index_row_ids[0]))
+        assert result_record["key"] == 101
+        assert result_record["name"] == "Asha"
+        assert result_record["region"] == "North"
+
+        model = LearnedIndexModel()
+        model.train(bundle)
+        lookup = model.search_optimized(205)
+        assert lookup["found"] is True
+        assert lookup["record"]["name"] == "Chao"
+        assert lookup["record"]["spend"] == 440
 
     def test_query_generator_ratios(self):
         bundle = generate_synthetic_uniform(size=2000, seed=42)
