@@ -130,4 +130,8 @@ def render():
         {"Roll Number": "25124015", "Name": "Arpit Yadav", "Role": "Machine Learning & Distribution Modeling"},
         {"Roll Number": "25124013", "Name": "Anup Kumar", "Role": "Data Engineering & Theoretical Research"},
     ]
-    st.dataframe(team_df, use_container_width=True, hide_index=True)
+    st.dataframe(team_df, width="stretch", hide_index=True)
+
+
+if __name__ == "__main__":
+    render()
