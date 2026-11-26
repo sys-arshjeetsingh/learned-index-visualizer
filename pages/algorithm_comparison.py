@@ -120,6 +120,8 @@ def render():
             <div class="metric-value" style="color: #315E91;">Baseline</div>
         </div>
         """, unsafe_allow_html=True)
+
+
         st.markdown(f"""
         - **Result:** {"FOUND" if bs_res["found"] else "NOT FOUND"}
         - **Index Position:** `{bs_res['index']}`
@@ -136,6 +138,8 @@ def render():
             <div class="metric-value" style="color: #D97706;">sklearn.predict</div>
         </div>
         """, unsafe_allow_html=True)
+
+
         st.markdown(f"""
         - **Result:** {"FOUND" if naive_res["found"] else "NOT FOUND"}
         - **Index Position:** `{naive_res['index']}`
@@ -153,6 +157,8 @@ def render():
             <div class="metric-value" style="color: #368A83;">Direct Arithmetic</div>
         </div>
         """, unsafe_allow_html=True)
+
+
         st.markdown(f"""
         - **Result:** {"FOUND" if opt_res["found"] else "NOT FOUND"}
         - **Index Position:** `{opt_res['index']}`
@@ -193,3 +199,7 @@ def render():
             Payload Record: <code>{opt_res['record']}</code>
         </div>
         """, unsafe_allow_html=True)
+
+
+if __name__ == "__main__":
+    render()
