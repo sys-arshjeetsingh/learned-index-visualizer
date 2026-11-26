@@ -157,7 +157,7 @@ def render():
     # --- Key Distribution Visualization ---
     st.markdown("### Key Distribution Analysis")
     fig = key_distribution_plot(bundle.index_keys, n_bins=80, title=f"Key Frequency Distribution — {bundle.name}")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     st.markdown("---")
 
@@ -168,7 +168,7 @@ def render():
     with col_heap:
         st.markdown("**Physical Table (Heap Storage - Arrival Order)**")
         heap_preview = pd.DataFrame(bundle.physical_records[:8])
-        st.dataframe(heap_preview, use_container_width=True, hide_index=True)
+        st.dataframe(heap_preview, width="stretch", hide_index=True)
 
     with col_idx:
         st.markdown("**Primary Index Entries (Sorted by Key with Row Pointers)**")
@@ -177,7 +177,7 @@ def render():
             "Key Value": bundle.index_keys[:8],
             "Physical Row Pointer": [f"Row {r_id}" for r_id in bundle.index_row_ids[:8]],
         })
-        st.dataframe(idx_df, use_container_width=True, hide_index=True)
+        st.dataframe(idx_df, width="stretch", hide_index=True)
 
     st.markdown("---")
 
@@ -191,7 +191,7 @@ def render():
             value=int(bundle.index_keys[len(bundle.index_keys) // 2]),
             step=1
         )
-        execute_search = st.button("Query Index", use_container_width=True)
+        execute_search = st.button("Query Index", width="stretch")
 
     with search_col2:
         if execute_search or "last_search_target" in st.session_state:
@@ -209,9 +209,15 @@ def render():
                     Payload Record: <code>{matched_record}</code>
                 </div>
                 """, unsafe_allow_html=True)
+
+
             else:
                 st.markdown(f"""
                 <div class="academic-box warning" style="margin: 0;">
                     <strong>Key Not Found:</strong> Key <code>{search_target:,}</code> does not exist in this index.
                 </div>
                 """, unsafe_allow_html=True)
+
+
+if __name__ == "__main__":
+    render()
