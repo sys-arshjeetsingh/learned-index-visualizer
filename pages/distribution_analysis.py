@@ -153,7 +153,7 @@ def render():
 
     with col_chart1:
         fig_hist = key_distribution_plot(bundle.index_keys, n_bins=70, title=f"Frequency Histogram — {bundle.name}")
-        st.plotly_chart(fig_hist, use_container_width=True)
+        st.plotly_chart(fig_hist, width="stretch")
 
     with col_chart2:
         fig_fit = regression_plot(
@@ -163,7 +163,7 @@ def render():
             max_error=train_stats["max_error"],
             title=f"Linear Model vs. Actual CDF — {bundle.name}"
         )
-        st.plotly_chart(fig_fit, use_container_width=True)
+        st.plotly_chart(fig_fit, width="stretch")
 
     st.markdown("---")
 
@@ -193,7 +193,7 @@ def render():
             })
 
         matrix_df = pd.DataFrame(profiles)
-        st.dataframe(matrix_df, use_container_width=True, hide_index=True)
+        st.dataframe(matrix_df, width="stretch", hide_index=True)
 
     st.markdown("---")
 
@@ -231,3 +231,7 @@ def render():
         callout_type="primary",
         title="Academic Insight"
     )
+
+
+if __name__ == "__main__":
+    render()
