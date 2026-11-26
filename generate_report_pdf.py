@@ -203,7 +203,7 @@ class NumberedCanvas(canvas.Canvas):
         # Footer on all pages
         page_str = f"Page {self._pageNumber} of {total_pages}"
         self.drawRightString(558, 36, page_str)
-        self.drawString(54, 36, "Confidential — Academic Research Submission | Department of Computer Science & Engineering")
+        self.drawString(54, 36, "Academic Research Submission | Department of Information Technology")
         self.setStrokeColor(colors.HexColor("#E2E8F0"))
         self.setLineWidth(0.5)
         self.line(54, 48, 558, 48)
@@ -296,7 +296,7 @@ def build_pdf_report():
     # =========================================================================
     # PAGE 1: TITLE, AUTHORS & ROLES (ARSHJEET SINGH AS RESEARCHER), ABSTRACT
     # =========================================================================
-    story.append(Paragraph("DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING", ParagraphStyle("DeptHeader", fontName="Helvetica-Bold", fontSize=8.5, textColor=colors.HexColor(TEAL_COLOR), spaceAfter=4)))
+    story.append(Paragraph("DEPARTMENT OF INFORMATION TECHNOLOGY", ParagraphStyle("DeptHeader", fontName="Helvetica-Bold", fontSize=8.5, textColor=colors.HexColor(TEAL_COLOR), spaceAfter=4)))
     story.append(Paragraph("LEARNED INDEX VISUALIZER", title_style))
     story.append(Paragraph("Machine Learning-Based Database Indexing: Architecture, Workflows, Datasets, and Empirical Evaluation", subtitle_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor(PRIMARY_COLOR), spaceAfter=10))
