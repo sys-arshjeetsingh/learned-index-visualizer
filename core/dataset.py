@@ -360,21 +360,36 @@ def load_custom_csv(uploaded_file, key_column: str, value_column: str = None) ->
     if key_column not in df.columns:
         raise ValueError(f"Key column '{key_column}' not found in uploaded CSV.")
 
-    raw_keys = pd.to_numeric(df[key_column], errors="coerce").dropna().astype(np.int64).values
+    numeric_keys = pd.to_numeric(df[key_column], errors="coerce")
+    valid_rows = df.loc[numeric_keys.notna()].copy()
+    if valid_rows.empty:
+        raise ValueError(f"Key column '{key_column}' does not contain numeric values.")
+
+    valid_keys = numeric_keys.loc[valid_rows.index].astype(np.int64)
+    raw_keys = valid_keys.to_numpy()
     physical_records = []
-    for i, row in df.iterrows():
-        val_str = str(row[value_column]) if value_column and value_column in df.columns else f"Record_{i}"
-        physical_records.append({
-            "row_id": i,
-            "key": int(row[key_column]),
-            "payload": val_str,
-            "status": "COMMITTED"
+    for row_id, (_, row) in enumerate(valid_rows.iterrows()):
+        # Preserve the complete source row so a lookup returns useful business data,
+        # not just the one optional display column.
+        record = {
+            "row_id": row_id,
+            "key": int(valid_keys.iloc[row_id]),
+            "status": "COMMITTED",
+        }
+        record.update({
+            column: value for column, value in row.items() if column != key_column
         })
+        if value_column and value_column in df.columns:
+            record["payload"] = str(row[value_column])
+        physical_records.append(record)
 
     return DatasetBundle(
         name=f"Custom CSV: {uploaded_file.name}",
         category="User Upload",
-        description=f"User-provided custom dataset with {len(raw_keys):,} rows.",
+        description=(
+            f"User-provided custom dataset with {len(raw_keys):,} numeric-key rows "
+            f"from {len(df):,} uploaded rows."
+        ),
         keys=raw_keys,
         physical_records=physical_records,
         key_name=key_column,
