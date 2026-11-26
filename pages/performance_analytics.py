@@ -80,7 +80,7 @@ def render():
     with col4:
         query_seed = st.number_input("Query Generator Seed", value=99, step=1)
 
-    execute_btn = st.button("Execute Live Benchmark", use_container_width=True)
+    execute_btn = st.button("Execute Live Benchmark", width="stretch")
 
     if execute_btn:
         with st.spinner(f"Executing {n_queries:,} queries across 3 algorithms ({n_reps} rounds)..."):
@@ -182,7 +182,7 @@ def render():
             "O(1) model + O(W) window"
         ]
     })
-    st.dataframe(detail_df, use_container_width=True, hide_index=True)
+    st.dataframe(detail_df, width="stretch", hide_index=True)
 
     st.markdown("---")
 
@@ -198,7 +198,7 @@ def render():
             results["opt_mean_time_us"],
             title="Mean Query Latency (μs)"
         )
-        st.plotly_chart(fig_bar, use_container_width=True)
+        st.plotly_chart(fig_bar, width="stretch")
 
     with col_ch2:
         # Latency distribution box plot
@@ -206,7 +206,7 @@ def render():
         nv_p = np.clip(results["naive_per_query_us"], 0, np.percentile(results["naive_per_query_us"], 99))
         op_p = np.clip(results["opt_per_query_us"], 0, np.percentile(results["opt_per_query_us"], 99))
         fig_box = charts.latency_distribution_box(bs_p.tolist(), nv_p.tolist(), op_p.tolist())
-        st.plotly_chart(fig_box, use_container_width=True)
+        st.plotly_chart(fig_box, width="stretch")
 
     # Prediction error analysis
     reg_data = model.get_regression_data(2500)
@@ -217,7 +217,7 @@ def render():
             np.abs(reg_data["errors"]),
             title="Prediction Residuals |ŷ - y| Distribution"
         )
-        st.plotly_chart(fig_err_hist, use_container_width=True)
+        st.plotly_chart(fig_err_hist, width="stretch")
 
     with col_err2:
         fig_evk = charts.error_vs_key_plot(
@@ -226,7 +226,7 @@ def render():
             max_error=results["max_absolute_error"],
             title="Signed Residual (ŷ - y) Across Key Space"
         )
-        st.plotly_chart(fig_evk, use_container_width=True)
+        st.plotly_chart(fig_evk, width="stretch")
 
     academic_callout(
         "<strong>Benchmarking Protocol:</strong> All queries use uniform high-resolution <code>time.perf_counter()</code>. "
@@ -236,3 +236,7 @@ def render():
         callout_type="primary",
         title="Measurement Protocol Note"
     )
+
+
+if __name__ == "__main__":
+    render()
